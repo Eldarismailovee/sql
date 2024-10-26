@@ -13,14 +13,6 @@ logging.basicConfig(filename='data_generator.log', level=logging.INFO,
 # Инициализация Faker с русской локализацией
 fake = Faker('ru_RU')
 
-# Возможные значения для пола
-GENDERS = ['M', 'F']
-
-# Глобальные списки для хранения сгенерированных ID
-# В реальной ситуации лучше получать реальные ID после вставки
-generated_students = []
-generated_courses = []
-
 # Максимальное количество записей для вставки
 MAX_RECORDS = 1000
 
@@ -35,10 +27,11 @@ def generate_sql_value(value, data_type):
             return f"'{value}'"
         elif data_type in ['INT', 'BIGINT', 'SMALLINT', 'TINYINT', 'FLOAT', 'REAL', 'DECIMAL', 'NUMERIC', 'BIT']:
             return str(value)
+        elif data_type == 'UNIQUEIDENTIFIER':
+            return f"'{value}'"
         elif data_type == 'VARBINARY':
             # Генерация случайных байтов, длина может быть изменена по необходимости
-            random_bytes = fake.binary(length=16)
-            return f"0x{random_bytes.hex()}"
+            return f"0x{value.hex()}"
         else:
             return f"N'{value}'"
     except Exception as e:
@@ -46,7 +39,7 @@ def generate_sql_value(value, data_type):
         return 'NULL'
 
 
-def get_table_schema(conn, table_name):
+def get_table_schema(conn, table_name, schema='dbo'):
     cursor = conn.cursor()
     try:
         cursor.execute("""
@@ -55,16 +48,95 @@ def get_table_schema(conn, table_name):
                 DATA_TYPE, 
                 CHARACTER_MAXIMUM_LENGTH,
                 IS_NULLABLE,
-                COLUMNPROPERTY(object_id(TABLE_SCHEMA + '.' + TABLE_NAME), COLUMN_NAME, 'IsIdentity') AS IsIdentity
+                COLUMNPROPERTY(OBJECT_ID(TABLE_SCHEMA + '.' + TABLE_NAME), COLUMN_NAME, 'IsIdentity') AS IsIdentity
             FROM INFORMATION_SCHEMA.COLUMNS
-            WHERE TABLE_NAME = ?
-        """, (table_name,))
-        schema = cursor.fetchall()
-        logging.info(f"Получена схема таблицы {table_name}")
-        return schema
+            WHERE TABLE_NAME = ? AND TABLE_SCHEMA = ?
+        """, (table_name, schema))
+        schema_info = cursor.fetchall()
+        logging.info(f"Получена схема таблицы {schema}.{table_name}")
+        return schema_info
     except Exception as e:
-        sg.popup_error(f"Ошибка при получении схемы таблицы: {e}")
-        logging.error(f"Ошибка при получении схемы таблицы {table_name}: {e}")
+        sg.popup_error(f"Ошибка при получении схемы таблицы {table_name}: {e}")
+        logging.error(f"Ошибка при получении схемы таблицы {schema}.{table_name}: {e}")
+        return []
+    finally:
+        cursor.close()
+
+
+def get_foreign_keys(conn, table_name, schema='dbo'):
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+            SELECT
+                fk.name AS ForeignKey,
+                cp.name AS ParentColumn,
+                tr.name AS ReferencedTable,
+                cr.name AS ReferencedColumn
+            FROM
+                sys.foreign_keys AS fk
+            INNER JOIN
+                sys.foreign_key_columns AS fkc ON fk.object_id = fkc.constraint_object_id
+            INNER JOIN
+                sys.columns AS cp ON fkc.parent_object_id = cp.object_id AND fkc.parent_column_id = cp.column_id
+            INNER JOIN
+                sys.tables AS tr ON fkc.referenced_object_id = tr.object_id
+            INNER JOIN
+                sys.columns AS cr ON fkc.referenced_object_id = cr.object_id AND fkc.referenced_column_id = cr.column_id
+            WHERE
+                fk.parent_object_id = OBJECT_ID(?)
+        """, (f"{schema}.{table_name}",))
+        foreign_keys = cursor.fetchall()
+        logging.info(f"Получены внешние ключи для таблицы {schema}.{table_name}")
+        return foreign_keys
+    except Exception as e:
+        sg.popup_error(f"Ошибка при получении внешних ключей для таблицы {table_name}: {e}")
+        logging.error(f"Ошибка при получении внешних ключей для таблицы {schema}.{table_name}: {e}")
+        return []
+    finally:
+        cursor.close()
+
+
+def get_unique_columns(conn, table_name, schema='dbo'):
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+            SELECT
+                kcu.COLUMN_NAME,
+                c.DATA_TYPE
+            FROM
+                INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc
+                JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE kcu
+                    ON tc.CONSTRAINT_NAME = kcu.CONSTRAINT_NAME
+                JOIN INFORMATION_SCHEMA.COLUMNS c
+                    ON c.TABLE_NAME = tc.TABLE_NAME AND c.COLUMN_NAME = kcu.COLUMN_NAME
+            WHERE
+                tc.TABLE_NAME = ?
+                AND tc.TABLE_SCHEMA = ?
+                AND tc.CONSTRAINT_TYPE = 'UNIQUE'
+        """, (table_name, schema))
+        unique_columns_info = cursor.fetchall()
+        # Исключаем столбцы типа BIT из уникальных
+        unique_columns = [(row.COLUMN_NAME, row.DATA_TYPE) for row in unique_columns_info if row.DATA_TYPE.upper() not in ['BIT']]
+        logging.info(f"Уникальные столбцы для таблицы {schema}.{table_name}: {[col[0] for col in unique_columns]}")
+        return unique_columns
+    except Exception as e:
+        sg.popup_error(f"Ошибка при получении уникальных столбцов для таблицы {table_name}: {e}")
+        logging.error(f"Ошибка при получении уникальных столбцов для таблицы {schema}.{table_name}: {e}")
+        return []
+    finally:
+        cursor.close()
+
+
+def get_existing_fk_values(conn, referenced_table, referenced_column, schema='dbo'):
+    cursor = conn.cursor()
+    try:
+        cursor.execute(f"SELECT [{referenced_column}] FROM [{schema}].[{referenced_table}]")
+        values = [row[0] for row in cursor.fetchall()]
+        logging.info(f"Получены существующие значения для внешнего ключа {referenced_column} из таблицы {schema}.{referenced_table}")
+        return values
+    except Exception as e:
+        sg.popup_error(f"Ошибка при получении существующих значений из таблицы {referenced_table}: {e}")
+        logging.error(f"Ошибка при получении существующих значений из таблицы {schema}.{referenced_table}: {e}")
         return []
     finally:
         cursor.close()
@@ -75,14 +147,14 @@ def generate_value(data_type):
         if data_type in ['NVARCHAR', 'VARCHAR', 'CHAR', 'NCHAR', 'TEXT']:
             return fake.word()
         elif data_type in ['INT', 'BIGINT', 'SMALLINT', 'TINYINT']:
-            return random.randint(1, 1000)
+            return fake.unique.random_int(min=1, max=1000000)
         elif data_type in ['FLOAT', 'REAL', 'DECIMAL', 'NUMERIC']:
             return round(random.uniform(1.0, 1000.0), 2)
-        elif data_type in ['DATE']:
+        elif data_type == 'DATE':
             return fake.date_between(start_date='-30y', end_date='today').strftime('%Y-%m-%d')
         elif data_type in ['DATETIME', 'DATETIME2', 'SMALLDATETIME']:
             return fake.date_time_between(start_date='-30y', end_date='now').strftime('%Y-%m-%d %H:%M:%S')
-        elif data_type in ['BIT']:
+        elif data_type == 'BIT':
             return random.choice([0, 1])
         elif data_type == 'UNIQUEIDENTIFIER':
             return str(uuid.uuid4())  # Генерация действительного GUID
@@ -95,54 +167,105 @@ def generate_value(data_type):
         return None
 
 
-def generate_records_dynamic(table_name, n, conn):
+def generate_records_dynamic(table_name, n, conn, schema='dbo'):
     try:
-        schema = get_table_schema(conn, table_name)
-        if not schema:
-            logging.warning(f"Схема таблицы {table_name} пустая.")
+        schema_info = get_table_schema(conn, table_name, schema)
+        if not schema_info:
+            logging.warning(f"Схема таблицы {schema}.{table_name} пустая.")
             return []
+
+        # Извлекаем внешние ключи для текущей таблицы
+        foreign_keys = get_foreign_keys(conn, table_name, schema)
+        fk_columns = {fk.ParentColumn: (fk.ReferencedTable, fk.ReferencedColumn) for fk in foreign_keys}
+
+        # Извлекаем уникальные столбцы для текущей таблицы
+        unique_columns = get_unique_columns(conn, table_name, schema)
+        unique_generators = {}
+
+        # Инициализируем уникальные генераторы для уникальных столбцов
+        for col, data_type in unique_columns:
+            if data_type.upper() in ['NVARCHAR', 'VARCHAR', 'CHAR', 'NCHAR', 'TEXT']:
+                unique_generators[col] = fake.unique.word
+            elif data_type.upper() in ['INT', 'BIGINT', 'SMALLINT', 'TINYINT']:
+                unique_generators[col] = lambda: fake.unique.random_int(min=1, max=1000000)
+            elif data_type.upper() == 'UNIQUEIDENTIFIER':
+                unique_generators[col] = fake.unique.uuid4
+            else:
+                # Добавьте поддержку других типов данных по необходимости
+                unique_generators[col] = fake.unique.word
 
         records = []
         for i in range(n):
             record = {}
-            for column in schema:
+            for column in schema_info:
                 column_name, data_type, char_max_length, is_nullable, is_identity = column
-                # Пропускаем столбцы с автоинкрементом
                 if is_identity == 1:
                     continue
-                # Генерируем значение для столбца
-                value = generate_value(data_type.upper())
-                # Ограничиваем длину строковых значений
-                if data_type.upper() in ['NVARCHAR', 'VARCHAR', 'CHAR', 'NCHAR', 'TEXT']:
-                    if char_max_length is not None and value is not None:
-                        if len(value) > char_max_length:
-                            logging.warning(f"Обрезано значение для столбца {column_name}: {value} до длины {char_max_length}")
-                            value = value[:char_max_length]  # Обрезаем строку до максимальной длины
+
+                if column_name in fk_columns:
+                    referenced_table, referenced_column = fk_columns[column_name]
+                    existing_values = get_existing_fk_values(conn, referenced_table, referenced_column, schema)
+                    if not existing_values:
+                        sg.popup_error(f"Нет существующих значений для внешнего ключа {column_name} в таблице {referenced_table}.")
+                        logging.error(f"Нет существующих значений для внешнего ключа {column_name} в таблице {referenced_table}.")
+                        return []
+                    value = random.choice(existing_values)
+                else:
+                    if any(col[0] == column_name for col in unique_columns):
+                        try:
+                            value = unique_generators[column_name]()
+                        except Exception as e:
+                            sg.popup_error(f"Ошибка при генерации уникального значения для столбца {column_name}: {e}")
+                            logging.error(f"Ошибка при генерации уникального значения для столбца {column_name}: {e}")
+                            return []
+                    else:
+                        value = generate_value(data_type.upper())
+
+                    if data_type.upper() in ['NVARCHAR', 'VARCHAR', 'CHAR', 'NCHAR', 'TEXT'] and char_max_length:
+                        value = value[:char_max_length] if len(value) > char_max_length else value
+
                 if value is None:
                     if is_nullable == 'YES':
                         record[column_name] = None
                     else:
-                        # Если столбец не допускает NULL, генерируем значение снова
+                        # Генерация повторного значения
                         while value is None:
-                            value = generate_value(data_type.upper())
-                            if data_type.upper() in ['NVARCHAR', 'VARCHAR', 'CHAR', 'NCHAR', 'TEXT'] and char_max_length is not None and value is not None:
-                                if len(value) > char_max_length:
-                                    value = value[:char_max_length]
+                            if column_name in fk_columns:
+                                referenced_table, referenced_column = fk_columns[column_name]
+                                existing_values = get_existing_fk_values(conn, referenced_table, referenced_column, schema)
+                                if not existing_values:
+                                    sg.popup_error(f"Нет существующих значений для внешнего ключа {column_name} в таблице {referenced_table}.")
+                                    logging.error(f"Нет существующих значений для внешнего ключа {column_name} в таблице {referenced_table}.")
+                                    return []
+                                value = random.choice(existing_values)
+                            else:
+                                if any(col[0] == column_name for col in unique_columns):
+                                    try:
+                                        value = unique_generators[column_name]()
+                                    except Exception as e:
+                                        sg.popup_error(f"Ошибка при генерации уникального значения для столбца {column_name}: {e}")
+                                        logging.error(f"Ошибка при генерации уникального значения для столбца {column_name}: {e}")
+                                        return []
+                                else:
+                                    value = generate_value(data_type.upper())
+                                    if data_type.upper() in ['NVARCHAR', 'VARCHAR', 'CHAR', 'NCHAR', 'TEXT'] and char_max_length:
+                                        value = value[:char_max_length] if len(value) > char_max_length else value
                             if value is not None:
                                 break
                         record[column_name] = value
                 else:
                     record[column_name] = value
             records.append(record)
-        logging.info(f"Сгенерировано {len(records)} записей для таблицы {table_name}")
+
+        logging.info(f"Сгенерировано {len(records)} записей для таблицы {schema}.{table_name}")
         return records
     except Exception as e:
         sg.popup_error(f"Ошибка при генерации записей: {e}")
-        logging.error(f"Ошибка при генерации записей для таблицы {table_name}: {e}")
+        logging.error(f"Ошибка при генерации записей для таблицы {schema}.{table_name}: {e}")
         return []
 
 
-def generate_insert_queries_dynamic(table_name, records, conn):
+def generate_insert_queries_dynamic(table_name, records, conn, schema='dbo'):
     if not records:
         return []
 
@@ -159,8 +282,8 @@ def generate_insert_queries_dynamic(table_name, records, conn):
                 cursor.execute("""
                     SELECT DATA_TYPE
                     FROM INFORMATION_SCHEMA.COLUMNS
-                    WHERE TABLE_NAME = ? AND COLUMN_NAME = ?
-                """, (table_name, column))
+                    WHERE TABLE_NAME = ? AND COLUMN_NAME = ? AND TABLE_SCHEMA = ?
+                """, (table_name, column, schema))
                 result = cursor.fetchone()
                 data_type = result[0] if result else 'NVARCHAR'
                 sql_value = generate_sql_value(value, data_type.upper())
@@ -168,13 +291,13 @@ def generate_insert_queries_dynamic(table_name, records, conn):
                 cursor.close()
             # Экранируем имена столбцов и таблицы
             columns_str = ', '.join([f"[{col}]" for col in columns])
-            query = f"INSERT INTO [{table_name}] ({columns_str}) VALUES ({', '.join(values)});"
+            query = f"INSERT INTO [{schema}].[{table_name}] ({columns_str}) VALUES ({', '.join(values)});"
             queries.append(query)
         except Exception as e:
-            logging.error(f"Ошибка при генерации запроса для столбца {column} в таблице {table_name}: {e}")
+            logging.error(f"Ошибка при генерации запроса для столбца {column} в таблице {schema}.{table_name}: {e}")
             continue  # Пропускаем эту запись и продолжаем
 
-    logging.info(f"Сгенерировано {len(queries)} SQL-запросов для вставки данных в таблицу {table_name}")
+    logging.info(f"Сгенерировано {len(queries)} SQL-запросов для вставки данных в таблицу {schema}.{table_name}")
     return queries
 
 
@@ -286,6 +409,7 @@ def main():
                 try:
                     conn = pyodbc.connect(connection_string)
                     sg.popup_ok("Успешно подключено к SQL Server.")
+                    logging.info(f"Успешное подключение к серверу {server}")
                     window_conn.close()
                     break  # Выходим из цикла подключения
                 except Exception as e:
@@ -305,7 +429,7 @@ def main():
         try:
             cursor = conn.cursor()
             cursor.execute("SELECT name FROM sys.databases WHERE name NOT IN ('master', 'tempdb', 'model', 'msdb');")
-            all_databases = [row[0] for row in cursor.fetchall()]
+            all_databases = [row.name for row in cursor.fetchall()]
             cursor.close()
             if not all_databases:
                 sg.popup_error("Нет доступных баз данных для выбора.")
@@ -345,6 +469,7 @@ def main():
                         try:
                             conn = pyodbc.connect(connection_string)
                             sg.popup_ok("Успешно подключено к SQL Server.")
+                            logging.info(f"Успешное подключение к серверу {server}")
                             window_conn.close()
                             break
                         except Exception as e:
@@ -388,7 +513,7 @@ def main():
                     try:
                         cursor = conn.cursor()
                         cursor.execute(f"SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';")
-                        all_tables = [row[0] for row in cursor.fetchall()]
+                        all_tables = [row.TABLE_NAME for row in cursor.fetchall()]
                         cursor.close()
 
                         if not all_tables:
@@ -427,55 +552,63 @@ def main():
                     # Возвращаемся к выбору базы данных
                     window_db = database_selection_window(all_databases)
                     while True:
-                        event_db, values_db = window_db.read()
-                        if event_db == sg.WINDOW_CLOSED or event_db == 'Выйти':
+                        try:
+                            event_db, values_db = window_db.read()
+                            if event_db == sg.WINDOW_CLOSED or event_db == 'Выйти':
+                                window_db.close()
+                                window_main.close()
+                                conn.close()
+                                sys.exit()
+                            if event_db == 'Выбрать':
+                                if not values_db['database']:
+                                    sg.popup_error("Пожалуйста, выберите базу данных.")
+                                    continue
+                                selected_db = values_db['database'][0]
+                                sg.popup_ok(f"Выбрана база данных: {selected_db}")
+                                try:
+                                    conn.autocommit = True  # Для переключения базы данных
+                                    conn.execute(f"USE [{selected_db}];")
+                                    logging.info(f"Переключено на базу данных {selected_db}")
+                                except Exception as e:
+                                    sg.popup_error(f"Ошибка при переключении базы данных: {e}")
+                                    logging.error(f"Ошибка при переключении базы данных {selected_db}: {e}")
+                                    window_db.close()
+                                    window_main.close()
+                                    conn.close()
+                                    sys.exit(1)
+
+                                # Получение списка таблиц в выбранной базе данных
+                                try:
+                                    cursor = conn.cursor()
+                                    cursor.execute(f"SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';")
+                                    all_tables = [row.TABLE_NAME for row in cursor.fetchall()]
+                                    cursor.close()
+
+                                    if not all_tables:
+                                        sg.popup_error("В выбранной базе данных нет таблиц для заполнения.")
+                                        logging.warning(f"В базе данных {selected_db} нет таблиц для заполнения.")
+                                        window_db.close()
+                                        window_db = database_selection_window(all_databases)
+                                        continue
+                                except Exception as e:
+                                    sg.popup_error(f"Ошибка при получении списка таблиц: {e}")
+                                    logging.error(f"Ошибка при получении списка таблиц из базы данных {selected_db}: {e}")
+                                    window_db.close()
+                                    window_main.close()
+                                    conn.close()
+                                    sys.exit(1)
+
+                                window_db.close()
+                                # Обновляем главное окно с новыми таблицами
+                                window_main = main_window(all_tables)
+                                break
+                        except Exception as e:
+                            sg.popup_error(f"Неизвестная ошибка при выборе базы данных: {e}")
+                            logging.error(f"Неизвестная ошибка при выборе базы данных: {e}")
                             window_db.close()
                             window_main.close()
                             conn.close()
-                            sys.exit()
-                        if event_db == 'Выбрать':
-                            if not values_db['database']:
-                                sg.popup_error("Пожалуйста, выберите базу данных.")
-                                continue
-                            selected_db = values_db['database'][0]
-                            sg.popup_ok(f"Выбрана база данных: {selected_db}")
-                            try:
-                                conn.autocommit = True  # Для переключения базы данных
-                                conn.execute(f"USE [{selected_db}];")
-                                logging.info(f"Переключено на базу данных {selected_db}")
-                            except Exception as e:
-                                sg.popup_error(f"Ошибка при переключении базы данных: {e}")
-                                logging.error(f"Ошибка при переключении базы данных {selected_db}: {e}")
-                                window_db.close()
-                                window_main.close()
-                                conn.close()
-                                sys.exit(1)
-
-                            # Получение списка таблиц в выбранной базе данных
-                            try:
-                                cursor = conn.cursor()
-                                cursor.execute(f"SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';")
-                                all_tables = [row[0] for row in cursor.fetchall()]
-                                cursor.close()
-
-                                if not all_tables:
-                                    sg.popup_error("В выбранной базе данных нет таблиц для заполнения.")
-                                    logging.warning(f"В базе данных {selected_db} нет таблиц для заполнения.")
-                                    window_db.close()
-                                    window_db = database_selection_window(all_databases)
-                                    continue
-                            except Exception as e:
-                                sg.popup_error(f"Ошибка при получении списка таблиц: {e}")
-                                logging.error(f"Ошибка при получении списка таблиц из базы данных {selected_db}: {e}")
-                                window_db.close()
-                                window_main.close()
-                                conn.close()
-                                sys.exit(1)
-
-                            window_db.close()
-                            # Обновляем главное окно с новыми таблицами
-                            window_main = main_window(all_tables)
-                            break
+                            sys.exit(1)
                     continue  # Возвращаемся к главному окну
 
                 if event == 'Генерировать и Вставить':
@@ -501,19 +634,22 @@ def main():
 
                     window_main['log'].update(f"Начата генерация {num} записей для таблицы '{table}'...\n")
 
-                    records = generate_records_dynamic(table, num, conn)
+                    records = generate_records_dynamic(table, num, conn, schema='dbo')
                     if not records:
                         sg.popup_error("Нет данных для вставки в выбранную таблицу. Проверьте схему таблицы.")
                         window_main['log'].update(f"Нет данных для вставки в таблицу '{table}'.\n", append=True)
                         continue
 
-                    queries = generate_insert_queries_dynamic(table, records, conn)
+                    queries = generate_insert_queries_dynamic(table, records, conn, schema='dbo')
                     if not queries:
                         sg.popup_error("Нет запросов для выполнения. Проверьте генерацию данных.")
                         window_main['log'].update(f"Нет запросов для выполнения для таблицы '{table}'.\n", append=True)
                         continue
 
                     execute_queries(conn, queries)
+
+                    # Сброс уникального генератора после вставки данных
+                    fake.unique.clear()
 
                     window_main['log'].update(f"Завершена генерация и вставка данных для таблицы '{table}'.\n", append=True)
             except Exception as e:
