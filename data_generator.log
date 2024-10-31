@@ -1397,3 +1397,346 @@
 2024-10-26 14:57:13,470:INFO:Сгенерировано 10 записей для таблицы dbo.UserProfile
 2024-10-26 14:57:13,554:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.UserProfile
 2024-10-26 14:57:14,330:INFO:Успешно выполнено 10 запросов.
+2024-10-26 15:18:06,854:INFO:Application started.
+2024-10-26 15:18:15,509:INFO:Successfully connected to server Eldar
+2024-10-26 15:18:16,349:INFO:Successfully connected to SQL Server.
+2024-10-26 15:18:20,017:INFO:Switched to database Market
+2024-10-26 15:18:21,178:WARNING:No tables found in database Market.
+2024-10-26 15:18:23,674:INFO:Switched to database ProductStoreDB
+2024-10-26 15:18:28,481:INFO:Schema for table dbo.Category retrieved.
+2024-10-26 15:18:28,535:INFO:Foreign keys for table dbo.Category retrieved.
+2024-10-26 15:18:28,655:INFO:Unique columns for table dbo.Category: []
+2024-10-26 15:18:28,655:WARNING:Truncated value for column CategoryImageUrl: кольцо to -1 chars.
+2024-10-26 15:18:28,656:INFO:Generated 1 records for table dbo.Category
+2024-10-26 15:18:28,723:INFO:Generated 1 SQL insert queries for table dbo.Category
+2024-10-26 15:18:30,718:ERROR:Error executing queries: ('42S22', "[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'цепочка'. (207) (SQLExecDirectW)")
+2024-10-26 15:18:33,531:INFO:Schema for table dbo.Category retrieved.
+2024-10-26 15:18:33,585:INFO:Foreign keys for table dbo.Category retrieved.
+2024-10-26 15:18:33,724:INFO:Unique columns for table dbo.Category: []
+2024-10-26 15:18:33,725:WARNING:Truncated value for column CategoryImageUrl: инструкция to -1 chars.
+2024-10-26 15:18:33,725:WARNING:Truncated value for column CategoryImageUrl: присесть to -1 chars.
+2024-10-26 15:18:33,725:WARNING:Truncated value for column CategoryImageUrl: пастух to -1 chars.
+2024-10-26 15:18:33,725:WARNING:Truncated value for column CategoryImageUrl: о to -1 chars.
+2024-10-26 15:18:33,726:WARNING:Truncated value for column CategoryImageUrl: инфекция to -1 chars.
+2024-10-26 15:18:33,726:WARNING:Truncated value for column CategoryImageUrl: мотоцикл to -1 chars.
+2024-10-26 15:18:33,726:WARNING:Truncated value for column CategoryImageUrl: пятеро to -1 chars.
+2024-10-26 15:18:33,726:WARNING:Truncated value for column CategoryImageUrl: еврейский to -1 chars.
+2024-10-26 15:18:33,726:WARNING:Truncated value for column CategoryImageUrl: очко to -1 chars.
+2024-10-26 15:18:33,726:WARNING:Truncated value for column CategoryImageUrl: пропаганда to -1 chars.
+2024-10-26 15:18:33,726:INFO:Generated 10 records for table dbo.Category
+2024-10-26 15:18:33,798:INFO:Generated 10 SQL insert queries for table dbo.Category
+2024-10-26 15:18:34,649:ERROR:Error executing queries: ('42S22', "[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'передо'. (207) (SQLExecDirectW)")
+2024-10-26 15:18:36,214:INFO:Schema for table dbo.SubCategory retrieved.
+2024-10-26 15:18:36,260:INFO:Foreign keys for table dbo.SubCategory retrieved.
+2024-10-26 15:18:36,369:INFO:Unique columns for table dbo.SubCategory: []
+2024-10-26 15:18:36,371:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:36,371:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:36,371:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:36,372:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:36,372:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:36,373:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:36,374:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:36,374:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:36,374:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:36,375:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:36,375:INFO:Generated 10 records for table dbo.SubCategory
+2024-10-26 15:18:36,452:INFO:Generated 10 SQL insert queries for table dbo.SubCategory
+2024-10-26 15:18:37,333:ERROR:Error executing queries: ('42S22', "[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'командующий'. (207) (SQLExecDirectW)")
+2024-10-26 15:18:38,912:INFO:Schema for table dbo.Product retrieved.
+2024-10-26 15:18:38,955:INFO:Foreign keys for table dbo.Product retrieved.
+2024-10-26 15:18:39,068:INFO:Unique columns for table dbo.Product: []
+2024-10-26 15:18:39,068:WARNING:Truncated value for column LongDescription: цепочка to -1 chars.
+2024-10-26 15:18:39,068:WARNING:Truncated value for column AdditionalDescriprion: функция to -1 chars.
+2024-10-26 15:18:39,069:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:39,069:WARNING:Truncated value for column LongDescription: товар to -1 chars.
+2024-10-26 15:18:39,069:WARNING:Truncated value for column AdditionalDescriprion: район to -1 chars.
+2024-10-26 15:18:39,069:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:39,070:WARNING:Truncated value for column LongDescription: кузнец to -1 chars.
+2024-10-26 15:18:39,070:WARNING:Truncated value for column AdditionalDescriprion: очутиться to -1 chars.
+2024-10-26 15:18:39,070:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:39,070:WARNING:Truncated value for column LongDescription: достоинство to -1 chars.
+2024-10-26 15:18:39,070:WARNING:Truncated value for column AdditionalDescriprion: подробность to -1 chars.
+2024-10-26 15:18:39,071:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:39,071:WARNING:Truncated value for column LongDescription: отражение to -1 chars.
+2024-10-26 15:18:39,071:WARNING:Truncated value for column AdditionalDescriprion: важный to -1 chars.
+2024-10-26 15:18:39,071:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:39,071:WARNING:Truncated value for column LongDescription: коричневый to -1 chars.
+2024-10-26 15:18:39,071:WARNING:Truncated value for column AdditionalDescriprion: девка to -1 chars.
+2024-10-26 15:18:39,072:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:39,072:WARNING:Truncated value for column LongDescription: секунда to -1 chars.
+2024-10-26 15:18:39,072:WARNING:Truncated value for column AdditionalDescriprion: госпожа to -1 chars.
+2024-10-26 15:18:39,073:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:39,073:WARNING:Truncated value for column LongDescription: прелесть to -1 chars.
+2024-10-26 15:18:39,073:WARNING:Truncated value for column AdditionalDescriprion: пространство to -1 chars.
+2024-10-26 15:18:39,073:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:39,074:WARNING:Truncated value for column LongDescription: зато to -1 chars.
+2024-10-26 15:18:39,074:WARNING:Truncated value for column AdditionalDescriprion: радость to -1 chars.
+2024-10-26 15:18:39,074:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:39,074:WARNING:Truncated value for column LongDescription: возбуждение to -1 chars.
+2024-10-26 15:18:39,074:WARNING:Truncated value for column AdditionalDescriprion: эффект to -1 chars.
+2024-10-26 15:18:39,075:INFO:Retrieved existing FK values for CategoryId from dbo.Category
+2024-10-26 15:18:39,075:INFO:Generated 10 records for table dbo.Product
+2024-10-26 15:18:39,266:INFO:Generated 10 SQL insert queries for table dbo.Product
+2024-10-26 15:18:40,540:ERROR:Error executing queries: ('42S22', "[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'холодно'. (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'мимо'. (207); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'кидать'. (207); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'неправда'. (207); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'домашний'. (207); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'единый'. (207)")
+2024-10-26 15:18:42,310:INFO:Schema for table dbo.ProductImages retrieved.
+2024-10-26 15:18:42,354:INFO:Foreign keys for table dbo.ProductImages retrieved.
+2024-10-26 15:18:42,464:INFO:Unique columns for table dbo.ProductImages: []
+2024-10-26 15:18:42,464:WARNING:Truncated value for column ImageUrl: дремать to -1 chars.
+2024-10-26 15:18:42,465:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:42,465:WARNING:Truncated value for column ImageUrl: мусор to -1 chars.
+2024-10-26 15:18:42,466:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:42,466:WARNING:Truncated value for column ImageUrl: уничтожение to -1 chars.
+2024-10-26 15:18:42,466:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:42,466:WARNING:Truncated value for column ImageUrl: торговля to -1 chars.
+2024-10-26 15:18:42,467:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:42,467:WARNING:Truncated value for column ImageUrl: сынок to -1 chars.
+2024-10-26 15:18:42,467:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:42,467:WARNING:Truncated value for column ImageUrl: набор to -1 chars.
+2024-10-26 15:18:42,467:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:42,467:WARNING:Truncated value for column ImageUrl: коммунизм to -1 chars.
+2024-10-26 15:18:42,468:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:42,468:WARNING:Truncated value for column ImageUrl: сынок to -1 chars.
+2024-10-26 15:18:42,468:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:42,468:WARNING:Truncated value for column ImageUrl: вытаскивать to -1 chars.
+2024-10-26 15:18:42,468:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:42,468:WARNING:Truncated value for column ImageUrl: столетие to -1 chars.
+2024-10-26 15:18:42,469:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:42,469:INFO:Generated 10 records for table dbo.ProductImages
+2024-10-26 15:18:42,523:INFO:Generated 10 SQL insert queries for table dbo.ProductImages
+2024-10-26 15:18:43,227:ERROR:Error executing queries: ('42S22', "[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'идея'. (207) (SQLExecDirectW)")
+2024-10-26 15:18:44,974:INFO:Schema for table dbo.Roles retrieved.
+2024-10-26 15:18:45,019:INFO:Foreign keys for table dbo.Roles retrieved.
+2024-10-26 15:18:45,123:INFO:Unique columns for table dbo.Roles: []
+2024-10-26 15:18:45,124:INFO:Generated 10 records for table dbo.Roles
+2024-10-26 15:18:45,161:INFO:Generated 10 SQL insert queries for table dbo.Roles
+2024-10-26 15:18:45,918:ERROR:Error executing queries: ('42S22', "[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'блин'. (207) (SQLExecDirectW)")
+2024-10-26 15:18:47,729:INFO:Schema for table dbo.Users retrieved.
+2024-10-26 15:18:47,729:INFO:Foreign keys for table dbo.Users retrieved.
+2024-10-26 15:18:47,732:INFO:Unique columns for table dbo.Users: ['UserName']
+2024-10-26 15:18:47,732:WARNING:Truncated value for column Address: цепочка to -1 chars.
+2024-10-26 15:18:47,732:WARNING:Truncated value for column ImageUrl: одиннадцать to -1 chars.
+2024-10-26 15:18:47,734:INFO:Retrieved existing FK values for RoleId from dbo.Roles
+2024-10-26 15:18:47,735:WARNING:Truncated value for column Address: следовательно to -1 chars.
+2024-10-26 15:18:47,735:WARNING:Truncated value for column ImageUrl: через to -1 chars.
+2024-10-26 15:18:47,735:INFO:Retrieved existing FK values for RoleId from dbo.Roles
+2024-10-26 15:18:47,735:WARNING:Truncated value for column Address: фонарик to -1 chars.
+2024-10-26 15:18:47,736:WARNING:Truncated value for column ImageUrl: добиться to -1 chars.
+2024-10-26 15:18:47,736:INFO:Retrieved existing FK values for RoleId from dbo.Roles
+2024-10-26 15:18:47,736:WARNING:Truncated value for column Address: командование to -1 chars.
+2024-10-26 15:18:47,736:WARNING:Truncated value for column ImageUrl: лапа to -1 chars.
+2024-10-26 15:18:47,737:INFO:Retrieved existing FK values for RoleId from dbo.Roles
+2024-10-26 15:18:47,737:WARNING:Truncated value for column Address: отражение to -1 chars.
+2024-10-26 15:18:47,737:WARNING:Truncated value for column ImageUrl: изредка to -1 chars.
+2024-10-26 15:18:47,737:INFO:Retrieved existing FK values for RoleId from dbo.Roles
+2024-10-26 15:18:47,737:WARNING:Truncated value for column Address: руководитель to -1 chars.
+2024-10-26 15:18:47,738:WARNING:Truncated value for column ImageUrl: выражаться to -1 chars.
+2024-10-26 15:18:47,738:INFO:Retrieved existing FK values for RoleId from dbo.Roles
+2024-10-26 15:18:47,738:WARNING:Truncated value for column Address: второй to -1 chars.
+2024-10-26 15:18:47,738:WARNING:Truncated value for column ImageUrl: приятель to -1 chars.
+2024-10-26 15:18:47,739:INFO:Retrieved existing FK values for RoleId from dbo.Roles
+2024-10-26 15:18:47,739:WARNING:Truncated value for column Address: терапия to -1 chars.
+2024-10-26 15:18:47,739:WARNING:Truncated value for column ImageUrl: необычный to -1 chars.
+2024-10-26 15:18:47,740:INFO:Retrieved existing FK values for RoleId from dbo.Roles
+2024-10-26 15:18:47,740:WARNING:Truncated value for column Address: школьный to -1 chars.
+2024-10-26 15:18:47,740:WARNING:Truncated value for column ImageUrl: сохранять to -1 chars.
+2024-10-26 15:18:47,740:INFO:Retrieved existing FK values for RoleId from dbo.Roles
+2024-10-26 15:18:47,740:WARNING:Truncated value for column Address: интеллектуальный to -1 chars.
+2024-10-26 15:18:47,741:WARNING:Truncated value for column ImageUrl: миллиард to -1 chars.
+2024-10-26 15:18:47,741:INFO:Retrieved existing FK values for RoleId from dbo.Roles
+2024-10-26 15:18:47,741:INFO:Generated 10 records for table dbo.Users
+2024-10-26 15:18:47,824:INFO:Generated 10 SQL insert queries for table dbo.Users
+2024-10-26 15:18:48,779:ERROR:Error executing queries: ('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Conversion failed when converting date and/or time from character string. (241) (SQLExecDirectW)')
+2024-10-26 15:18:51,076:INFO:Schema for table dbo.ProductReview retrieved.
+2024-10-26 15:18:51,076:INFO:Foreign keys for table dbo.ProductReview retrieved.
+2024-10-26 15:18:51,079:INFO:Unique columns for table dbo.ProductReview: []
+2024-10-26 15:18:51,079:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:51,080:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:51,081:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:51,081:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:51,081:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:51,081:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:51,082:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:51,082:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:51,082:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:51,083:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:51,083:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:51,084:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:51,084:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:51,084:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:51,084:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:51,085:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:51,085:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:51,085:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:51,086:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:51,086:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:51,086:INFO:Generated 10 records for table dbo.ProductReview
+2024-10-26 15:18:51,126:INFO:Generated 10 SQL insert queries for table dbo.ProductReview
+2024-10-26 15:18:52,306:ERROR:Error executing queries: ('42S22', "[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'совещание'. (207) (SQLExecDirectW)")
+2024-10-26 15:18:54,363:INFO:Schema for table dbo.Wishlist retrieved.
+2024-10-26 15:18:54,364:INFO:Foreign keys for table dbo.Wishlist retrieved.
+2024-10-26 15:18:54,366:INFO:Unique columns for table dbo.Wishlist: []
+2024-10-26 15:18:54,367:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:54,367:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:54,367:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:54,368:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:54,368:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:54,368:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:54,369:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:54,369:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:54,369:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:54,370:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:54,370:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:54,370:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:54,370:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:54,371:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:54,371:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:54,371:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:54,372:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:54,372:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:54,372:INFO:Retrieved existing FK values for ProductId from dbo.Product
+2024-10-26 15:18:54,374:INFO:Retrieved existing FK values for UserId from dbo.Users
+2024-10-26 15:18:54,374:INFO:Generated 10 records for table dbo.Wishlist
+2024-10-26 15:18:54,411:INFO:Generated 10 SQL insert queries for table dbo.Wishlist
+2024-10-26 15:18:55,368:ERROR:Error executing queries: ('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Conversion failed when converting date and/or time from character string. (241) (SQLExecDirectW)')
+2024-10-26 15:18:57,032:INFO:Application terminated.
+2024-10-26 15:19:00,705:INFO:Application started.
+2024-10-26 15:19:06,084:INFO:Successfully connected to server Eldar
+2024-10-26 15:19:07,210:INFO:Successfully connected to SQL Server.
+2024-10-26 15:19:09,598:INFO:Switched to database C:\USERS\FGGHY\SOURCE\REPOS\LAB\LAB\APP_DATA\PRODUCT.MDF
+2024-10-26 15:19:12,497:INFO:Application terminated.
+2024-10-26 15:22:51,217:INFO:Application started.
+2024-10-26 15:23:02,517:INFO:Successfully connected to server Eldar
+2024-10-26 15:23:04,172:INFO:Successfully connected to SQL Server.
+2024-10-26 15:23:11,578:INFO:Switched to database Users
+2024-10-26 15:23:37,315:INFO:Application terminated.
+2024-10-26 15:26:19,871:INFO:=== Приложение Запущено ===
+2024-10-26 15:26:29,712:INFO:=== Приложение Запущено ===
+2024-10-26 15:26:39,024:INFO:=== Приложение Запущено ===
+2024-10-26 15:26:56,003:INFO:=== Приложение Запущено ===
+2024-10-26 15:29:39,796:INFO:=== Приложение Запущено ===
+2024-10-26 15:30:36,754:INFO:Successfully connected to server Eldar
+2024-10-26 15:30:39,532:ERROR:Ошибка подключения к серверу Eldar: 'SchemaExtractor' object has no attribute 'get_tables'
+2024-10-26 15:30:40,036:INFO:Successfully connected to server Eldar
+2024-10-26 15:30:41,651:ERROR:Ошибка подключения к серверу Eldar: 'SchemaExtractor' object has no attribute 'get_tables'
+2024-10-26 15:30:47,527:INFO:Successfully connected to server Eldar
+2024-10-26 15:30:50,002:ERROR:Ошибка подключения к серверу Eldar: 'SchemaExtractor' object has no attribute 'get_tables'
+2024-10-31 14:26:57,913:ERROR:Ошибка подключения к серверу Eldar: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [2].  (2) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Login timeout expired (0); [08001] [Microsoft][ODBC Driver 17 for SQL Server]A network-related or instance-specific error has occurred while establishing a connection to SQL Server. Server is not found or not accessible. Check if instance name is correct and if SQL Server is configured to allow remote connections. For more information see SQL Server Books Online. (2)')
+2024-10-31 16:55:31,075:INFO:Успешное подключение к серверу Eldar
+2024-10-31 16:55:40,638:INFO:Переключено на базу данных Test
+2024-10-31 16:55:46,947:INFO:Переключено на базу данных Users
+2024-10-31 16:55:54,021:INFO:Получена схема таблицы dbo.Users
+2024-10-31 16:55:54,084:INFO:Получены внешние ключи для таблицы dbo.Users
+2024-10-31 16:55:54,189:INFO:Уникальные столбцы для таблицы dbo.Users: []
+2024-10-31 16:55:54,190:INFO:Сгенерировано 10 записей для таблицы dbo.Users
+2024-10-31 16:55:54,325:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.Users
+2024-10-31 16:55:55,437:INFO:Успешно выполнено 10 запросов.
+2024-10-31 16:55:57,733:INFO:Получена схема таблицы dbo.ContactForm
+2024-10-31 16:55:57,774:INFO:Получены внешние ключи для таблицы dbo.ContactForm
+2024-10-31 16:55:57,873:INFO:Уникальные столбцы для таблицы dbo.ContactForm: []
+2024-10-31 16:55:57,874:INFO:Сгенерировано 10 записей для таблицы dbo.ContactForm
+2024-10-31 16:55:57,964:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.ContactForm
+2024-10-31 16:55:58,826:INFO:Успешно выполнено 10 запросов.
+2024-10-31 16:56:00,738:INFO:Получена схема таблицы dbo.CategoryProducts
+2024-10-31 16:56:00,779:INFO:Получены внешние ключи для таблицы dbo.CategoryProducts
+2024-10-31 16:56:00,873:INFO:Уникальные столбцы для таблицы dbo.CategoryProducts: []
+2024-10-31 16:56:00,873:INFO:Сгенерировано 10 записей для таблицы dbo.CategoryProducts
+2024-10-31 16:56:00,910:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.CategoryProducts
+2024-10-31 16:56:01,651:INFO:Успешно выполнено 10 запросов.
+2024-10-31 16:56:03,441:INFO:Получена схема таблицы dbo.Products
+2024-10-31 16:56:03,487:INFO:Получены внешние ключи для таблицы dbo.Products
+2024-10-31 16:56:03,587:INFO:Уникальные столбцы для таблицы dbo.Products: []
+2024-10-31 16:56:03,588:INFO:Сгенерировано 10 записей для таблицы dbo.Products
+2024-10-31 16:56:03,712:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.Products
+2024-10-31 16:56:04,552:INFO:Успешно выполнено 10 запросов.
+2024-10-31 16:56:06,320:INFO:Получена схема таблицы dbo.Card
+2024-10-31 16:56:06,361:INFO:Получены внешние ключи для таблицы dbo.Card
+2024-10-31 16:56:06,458:INFO:Уникальные столбцы для таблицы dbo.Card: []
+2024-10-31 16:56:06,459:INFO:Сгенерировано 10 записей для таблицы dbo.Card
+2024-10-31 16:56:06,546:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.Card
+2024-10-31 16:56:07,469:INFO:Успешно выполнено 10 запросов.
+2024-10-31 16:56:09,595:INFO:Получена схема таблицы dbo.AdminLogin
+2024-10-31 16:56:09,671:INFO:Получены внешние ключи для таблицы dbo.AdminLogin
+2024-10-31 16:56:09,791:INFO:Уникальные столбцы для таблицы dbo.AdminLogin: []
+2024-10-31 16:56:09,792:INFO:Сгенерировано 10 записей для таблицы dbo.AdminLogin
+2024-10-31 16:56:09,861:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.AdminLogin
+2024-10-31 16:56:10,637:INFO:Успешно выполнено 10 запросов.
+2024-10-31 16:56:12,267:INFO:Получена схема таблицы dbo.DeliveryAdress
+2024-10-31 16:56:12,309:INFO:Получены внешние ключи для таблицы dbo.DeliveryAdress
+2024-10-31 16:56:12,409:INFO:Уникальные столбцы для таблицы dbo.DeliveryAdress: []
+2024-10-31 16:56:12,410:INFO:Сгенерировано 10 записей для таблицы dbo.DeliveryAdress
+2024-10-31 16:56:12,480:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.DeliveryAdress
+2024-10-31 16:56:13,344:INFO:Успешно выполнено 10 запросов.
+2024-10-31 16:56:15,098:INFO:Получена схема таблицы dbo.Table
+2024-10-31 16:56:15,099:INFO:Получены внешние ключи для таблицы dbo.Table
+2024-10-31 16:56:15,101:INFO:Уникальные столбцы для таблицы dbo.Table: []
+2024-10-31 16:56:15,102:INFO:Сгенерировано 10 записей для таблицы dbo.Table
+2024-10-31 16:56:15,148:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.Table
+2024-10-31 16:56:15,928:INFO:Успешно выполнено 10 запросов.
+2024-10-31 16:56:17,447:INFO:Получена схема таблицы dbo.UserProfile
+2024-10-31 16:56:17,448:INFO:Получены внешние ключи для таблицы dbo.UserProfile
+2024-10-31 16:56:17,450:INFO:Уникальные столбцы для таблицы dbo.UserProfile: []
+2024-10-31 16:56:17,451:INFO:Сгенерировано 10 записей для таблицы dbo.UserProfile
+2024-10-31 16:56:17,533:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.UserProfile
+2024-10-31 16:56:18,589:INFO:Успешно выполнено 10 запросов.
+2024-10-31 16:56:21,369:INFO:Переключено на базу данных University
+2024-10-31 16:56:25,387:INFO:Получена схема таблицы dbo.Departments 
+2024-10-31 16:56:25,429:INFO:Получены внешние ключи для таблицы dbo.Departments 
+2024-10-31 16:56:25,531:INFO:Уникальные столбцы для таблицы dbo.Departments : ['DepartmentName']
+2024-10-31 16:56:25,531:INFO:Сгенерировано 10 записей для таблицы dbo.Departments 
+2024-10-31 16:56:25,566:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.Departments 
+2024-10-31 16:56:26,346:INFO:Успешно выполнено 10 запросов.
+2024-10-31 16:56:27,828:INFO:Получена схема таблицы dbo.Professors
+2024-10-31 16:56:27,869:INFO:Получены внешние ключи для таблицы dbo.Professors
+2024-10-31 16:56:27,971:INFO:Уникальные столбцы для таблицы dbo.Professors: []
+2024-10-31 16:56:27,972:INFO:Получены существующие значения для внешнего ключа DepartmentID из таблицы dbo.Departments 
+2024-10-31 16:56:27,972:INFO:Получены существующие значения для внешнего ключа DepartmentID из таблицы dbo.Departments 
+2024-10-31 16:56:27,973:INFO:Получены существующие значения для внешнего ключа DepartmentID из таблицы dbo.Departments 
+2024-10-31 16:56:27,973:INFO:Получены существующие значения для внешнего ключа DepartmentID из таблицы dbo.Departments 
+2024-10-31 16:56:27,974:INFO:Получены существующие значения для внешнего ключа DepartmentID из таблицы dbo.Departments 
+2024-10-31 16:56:27,974:INFO:Получены существующие значения для внешнего ключа DepartmentID из таблицы dbo.Departments 
+2024-10-31 16:56:27,975:INFO:Получены существующие значения для внешнего ключа DepartmentID из таблицы dbo.Departments 
+2024-10-31 16:56:27,975:INFO:Получены существующие значения для внешнего ключа DepartmentID из таблицы dbo.Departments 
+2024-10-31 16:56:27,975:INFO:Получены существующие значения для внешнего ключа DepartmentID из таблицы dbo.Departments 
+2024-10-31 16:56:27,977:INFO:Получены существующие значения для внешнего ключа DepartmentID из таблицы dbo.Departments 
+2024-10-31 16:56:27,977:INFO:Сгенерировано 10 записей для таблицы dbo.Professors
+2024-10-31 16:56:28,050:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.Professors
+2024-10-31 16:56:28,687:INFO:Успешно выполнено 10 запросов.
+2024-10-31 16:56:30,489:INFO:Получена схема таблицы dbo.Students
+2024-10-31 16:56:30,531:INFO:Получены внешние ключи для таблицы dbo.Students
+2024-10-31 16:56:30,627:INFO:Уникальные столбцы для таблицы dbo.Students: []
+2024-10-31 16:56:30,629:INFO:Сгенерировано 10 записей для таблицы dbo.Students
+2024-10-31 16:56:30,715:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.Students
+2024-10-31 16:56:34,622:ERROR:Ошибка при выполнении запросов: ('23000', "[23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot insert duplicate key row in object 'dbo.Students' with unique index 'IX_Students'. The duplicate key value is (висеть). (2601) (SQLExecDirectW); [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")
+2024-10-31 16:58:00,870:INFO:Получена схема таблицы dbo.Students
+2024-10-31 16:58:00,871:INFO:Получены внешние ключи для таблицы dbo.Students
+2024-10-31 16:58:00,873:INFO:Уникальные столбцы для таблицы dbo.Students: []
+2024-10-31 16:58:00,875:INFO:Сгенерировано 10 записей для таблицы dbo.Students
+2024-10-31 16:58:00,892:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.Students
+2024-10-31 16:58:01,814:INFO:Успешно выполнено 10 запросов.
+2024-10-31 16:59:25,654:INFO:Получена схема таблицы dbo.Students
+2024-10-31 16:59:25,655:INFO:Получены внешние ключи для таблицы dbo.Students
+2024-10-31 16:59:25,657:INFO:Уникальные столбцы для таблицы dbo.Students: []
+2024-10-31 16:59:25,659:INFO:Сгенерировано 10 записей для таблицы dbo.Students
+2024-10-31 16:59:25,680:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.Students
+2024-10-31 16:59:26,915:ERROR:Ошибка при выполнении запросов: ('23000', "[23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot insert duplicate key row in object 'dbo.Students' with unique index 'IX_Students'. The duplicate key value is (сопровождаться). (2601) (SQLExecDirectW); [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")
+2024-10-31 16:59:27,556:INFO:Получена схема таблицы dbo.Students
+2024-10-31 16:59:27,557:INFO:Получены внешние ключи для таблицы dbo.Students
+2024-10-31 16:59:27,559:INFO:Уникальные столбцы для таблицы dbo.Students: []
+2024-10-31 16:59:27,560:INFO:Сгенерировано 10 записей для таблицы dbo.Students
+2024-10-31 16:59:27,580:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.Students
+2024-10-31 16:59:28,882:ERROR:Ошибка при выполнении запросов: ('23000', "[23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot insert duplicate key row in object 'dbo.Students' with unique index 'IX_Students'. The duplicate key value is (выкинуть). (2601) (SQLExecDirectW); [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")
+2024-10-31 16:59:29,498:INFO:Получена схема таблицы dbo.Students
+2024-10-31 16:59:29,499:INFO:Получены внешние ключи для таблицы dbo.Students
+2024-10-31 16:59:29,501:INFO:Уникальные столбцы для таблицы dbo.Students: []
+2024-10-31 16:59:29,504:INFO:Сгенерировано 10 записей для таблицы dbo.Students
+2024-10-31 16:59:29,521:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.Students
+2024-10-31 16:59:30,961:ERROR:Ошибка при выполнении запросов: ('23000', "[23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot insert duplicate key row in object 'dbo.Students' with unique index 'IX_Students'. The duplicate key value is (висеть). (2601) (SQLExecDirectW); [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")
+2024-10-31 16:59:31,754:INFO:Получена схема таблицы dbo.Students
+2024-10-31 16:59:31,755:INFO:Получены внешние ключи для таблицы dbo.Students
+2024-10-31 16:59:31,757:INFO:Уникальные столбцы для таблицы dbo.Students: []
+2024-10-31 16:59:31,759:INFO:Сгенерировано 10 записей для таблицы dbo.Students
+2024-10-31 16:59:31,776:INFO:Сгенерировано 10 SQL-запросов для вставки данных в таблицу dbo.Students
+2024-10-31 17:00:36,413:ERROR:Ошибка при выполнении запросов: ('23000', "[23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot insert duplicate key row in object 'dbo.Students' with unique index 'IX_Students'. The duplicate key value is (запустить). (2601) (SQLExecDirectW); [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")
+2024-10-31 17:01:06,108:INFO:Переключено на базу данных Test
+2024-10-31 17:01:13,388:INFO:Переключено на базу данных Test
+2024-10-31 17:01:18,160:INFO:Переключено на базу данных ProjectStore
